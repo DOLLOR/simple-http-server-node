@@ -12,6 +12,7 @@ const createServer = ({port=8722,host='0.0.0.0',onRequest}) => {
       .writeHead(200,{
         'Server': `My server Node.js/${process.version}`,
         'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': '*',
         'Cache-Control': 'public, max-age=0',
       })
       .end(responseText);
