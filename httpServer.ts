@@ -26,6 +26,7 @@ const createServer = ({ port = 8722, host = '0.0.0.0', onRequest }: CreateServer
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Headers': '*',
           'Cache-Control': 'public, max-age=0',
+          'Content-Type': 'text/plain; charset=UTF-8',
         })
         .end(responseText);
     });
