@@ -34,7 +34,7 @@ const createServer = ({ port = 8722, host = '0.0.0.0', onRequest }: CreateServer
     port,
     host,
   }, () => {
-    console.log('server is running');
+    console.log('server is running', host, port);
   });
 };
 
