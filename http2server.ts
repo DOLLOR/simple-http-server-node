@@ -3,8 +3,6 @@ import * as fs from 'fs';
 
 const HC = http2.constants;
 
-console.log('ok');
-
 interface CreateServerArgs {
   port?: number
   host?: string
