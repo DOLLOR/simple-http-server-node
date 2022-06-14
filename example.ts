@@ -3,8 +3,14 @@ import * as http2server from './http2server';
 
 httpserver.createServer({
   port: 9302,
-  onRequest: async ({ headers, data, requestInfo }) => {
-    console.log(requestInfo, headers, data.toString());
+  onRequest: async (req, res) => {
+    const data = await httpserver.getRequestBody(req);
+    console.log(
+      req.method,
+      req.url,
+      req.headers,
+      data.toString(),
+    );
     return {
       data: 'ok',
     };
@@ -13,8 +19,14 @@ httpserver.createServer({
 
 http2server.createServer({
   port: 9303,
-  onRequest: async ({ headers, data, requestInfo }) => {
-    console.log(requestInfo, headers, data.toString());
+  onRequest: async (req, res) => {
+    const data = await httpserver.getRequestBody(req);
+    console.log(
+      req.method,
+      req.url,
+      req.headers,
+      data.toString(),
+    );
     return {
       data: 'ok',
     };
