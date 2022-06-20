@@ -46,7 +46,7 @@ export const getRequestBody = (request: http.Http2ServerRequest) => {
       if (
         Number.isFinite(contentLength)
         &&
-        currentLength >= contentLength
+        currentLength === contentLength
       ) {
         end();
       }
