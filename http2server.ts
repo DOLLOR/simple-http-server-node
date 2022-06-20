@@ -21,11 +21,35 @@ interface RequestResult {
 
 export const getRequestBody = (request: http.Http2ServerRequest) => {
   return new Promise<Buffer>(resolve => {
-    const chunks: Uint8Array[] = [];
-    request.on('data', chunk => chunks.push(chunk));
-    request.on('end', () => {
+
+    const contentLength = parseInt(
+      request.headers[http.constants.HTTP2_HEADER_CONTENT_LENGTH] as string,
+      10
+    );
+    let currentLength = 0;
+
+    const chunks: Buffer[] = [];
+    const end = () => {
       const data = Buffer.concat(chunks);
       resolve(data);
+    };
+
+    request.on('end', end);
+
+    request.on('data', (chunk) => {
+      const data = chunk as Buffer;
+
+      chunks.push(data);
+      currentLength += data.byteLength;
+      console.log('getRequestBody on data', { contentLength, currentLength });
+
+      if (
+        Number.isFinite(contentLength)
+        &&
+        currentLength >= contentLength
+      ) {
+        end();
+      }
     });
   })
 };
